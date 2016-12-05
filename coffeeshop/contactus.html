@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+    <title>Contact Us</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/coffee.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic400italic600italic700italic800italic400300600700800" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100300400600700100italic300italic400italic600italic700italic" rel="stylesheet" type="text/css">
+	
+</head>
+	
+	<style>
+	
+		
+			
+		.error{
+			display: none;
+			margin-left: 10px;
+		}		
+		
+		.error_show{
+			font-size:1.5em;
+			color: rgb(189, 48, 48);
+			margin-left: 10px;
+		}
+		
+		input.invalid, textarea.invalid{
+			border: 2px solid red;
+		}
+		
+		input.valid, textarea.valid{
+			border: 2px solid green;
+		}
+	</style>
+	
+	<!-- JavaScript Code -->
+	<script>
+		$(document).ready(function() {
+			
+				$('#contact_name').on('input', function() {
+					var input=$(this);
+					var is_name=input.val();
+					if(is_name){input.removeClass("invalid").addClass("valid");}
+					else{input.removeClass("valid").addClass("invalid");}
+				});
+				
+			
+				$('#contact_email').on('input', function() {
+					var input=$(this);
+					var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+					var is_email=re.test(input.val());
+					if(is_email){input.removeClass("invalid").addClass("valid");}
+					else{input.removeClass("valid").addClass("invalid");}
+				});
+				
+				
+				$('#contact_subject').on('input', function() {
+					var input=$(this);
+					var is_name=input.val();
+					if(is_name){input.removeClass("invalid").addClass("valid");}
+					else{input.removeClass("valid").addClass("invalid");}
+				});
+				
+			
+				$('#contact_message').keyup(function(event) {
+					var input=$(this);
+					var message=$(this).val();
+					
+					if(message){input.removeClass("invalid").addClass("valid");}
+					else{input.removeClass("valid").addClass("invalid");}	
+				});
+		
+			
+			$("#contact_submit button").click(function(event){
+				var form_data=$("#contact").serializeArray();
+				var error_free=true;
+				for (var input in form_data){
+					var element=$("#contact_"+form_data[input]['name']);
+					var valid=element.hasClass("valid");
+					var error_element=$("span", element.parent());
+					if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+					else{error_element.removeClass("error_show").addClass("error");}
+				}
+				if (!error_free){
+					event.preventDefault(); 
+				}
+				else{
+					alert('No errors: Form will be submitted');
+				}
+			});
+			
+			
+			
+		});
+	</script>
+	
+    <body>
+				<section id="head">
+		
+		
+			    <div class="brand">Campus Coffee</div>
+			    <div class="address-bar">300 ElCamino Real | Santa Clara CA 95050 | 408.554.4000</div>
+			    <nav class="navbar navbar-default" role="navigation">
+			        <div class="container menu">
+	           
+			            <div class="navbar-header">
+			                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			                    <span class="sr-only">Toggle navigation</span>
+			                    <span class="icon-bar"></span>
+			                    <span class="icon-bar"></span>
+			                    <span class="icon-bar"></span>
+			                </button>
+	               
+			                <a class="navbar-brand" href="index.html">Campus Coffee</a>
+			            </div>
+	            
+			            <div class="collapse navbar-collapse">
+			                  <div class="address-bar"><a href="index.php">HOME </a>|<a href="menu.html">  MENU </a>| <a href="phpsqlsearch_map.html"> STORES  </a>|<a href="shoponline.php"> SHOPONLINE  </a>| <a href="aboutus.html"> ABOUT US  </a>|<a href="contactus.html"> CONTACT US</a>|<a href="login.php"> SIGNIN  </a>|<a href="register.php"> REGISTER  </a></div>
+			              </div>
+	           
+			        </div>
+	        
+			    </nav>
+		</section>
+				<section id="body">
+			  	  	<div class="container-fluid">
+			  	          <div class="row">
+			  	              <div class="col-lg-12 text-center">
+			  	                  <h2 class="section-heading">Contact Us</h2>
+			  	              </div>
+			  	          </div>
+						  
+			  	  		
+		<form id="contact" method="post" action="" class="form-horizontal" action="mailto:gvemulapalli@scu.edu">
+			<!-- Name -->
+  	      <div class="form-group">
+  	        <label class="col-sm-2 col-md-3 control-label for="contact_name" ">Name</label>
+  	        <div class="col-sm-10 col-md-6">
+			
+				
+				<input type="text" id="contact_name" name="name" placeholder="John" class="form-control"></input>
+				<span class="error">This field is required</span>
+  	        </div>
+  	      </div>
+			<!-- Email -->
+			 <div class="form-group">
+				<label class="col-sm-2 col-md-3 control-label for="contact_email" ">Email</label>
+				 <div class="col-sm-10 col-md-6">
+				<input type="email" id="contact_email" placeholder="john@gmail.com" name="email" class="form-control"></input>
+				<span class="error">A valid email address is required</span>				
+			</div>	
+			</div>					
+			<!--Website -->
+		 <div class="form-group">
+			<label class="col-sm-2 col-md-3 control-label for="contact_subject" ">Subject</label>
+				<div class="col-sm-10 col-md-6">
+				<input type="text" id="contact_subject" placeholder="Subject" name="subject" class="form-control"></input>
+				<span class="error">This field is required</span>								
+			</div>
+			</div>							
+			<!-- Message -->
+		<div class="form-group">
+				<label class="col-sm-2 col-md-3 control-label"for="contact_message" >Message</label>
+				 <div class="col-sm-10 col-md-6">
+				<textarea class="form-control" id="contact_message"  placeholder="Your Message" name="message"></textarea>
+				<span class="error">This field is required</span>												
+		</div>
+		</div>				
+	  	    <div class="clearfix"></div>
+	  	   
+			
+			<div class="col-lg-12 text-center" id="contact_submit">				
+				<button type="submit"  style="color:black;">Send Message</button>
+			</div>
+		</form>
+	</div>
+	</section>
+			<section id="footer1">
+		        <div class="container foot1">
+            
+		                <div class="col-lg-12 text-center foot12" style="padding-top:10px;padding-left:0px;padding-right:0px">
+		                   <ul class="list-inline">
+		             <li> <a href="https://www.twitter.com/"><img class="img-responsive img-full" src="css/icons/twitter.jpg" alt="" style="width:40px;height:40px;"></a></li>
+							<li><a href="https://www.linkedin.com/"> <img class="img-responsive img-full" src="css/icons/linkedin.jpg" alt="" style="width:40px;height:40px;"></a></li>
+							<li><a href="https://www.facebook.com/pages/Campus-Coffee-Bean-Grill/496626497026600"><img class="img-responsive img-full" src="css/icons/fb.jpg" alt="" style="width:40px;height:40px;"></a></li>
+		                   </ul>
+	                        <p style="padding:0px">Copyright &copy; Geetha | Mallika 2015</p>
+		                </div>
+		            </div>
+	            </section>
+	    </body>
+		</html>
+	
+      
+    
+
